@@ -45,6 +45,7 @@ if (process.argv[2] === 'help' || process.argv[2] === '-h') {
 }
 (async () => {
     const data = [];
+    const rssData = [];
     const feed = new RSS({
         title: '当然我在扯淡',
         site_url: 'http://www.yinwang.org',
@@ -78,12 +79,13 @@ if (process.argv[2] === 'help' || process.argv[2] === '-h') {
         const urlStruct = data[index].url.split('/');
         article.removeChild(article.childNodes[0]);
         article.removeChild(article.childNodes[0]);
-        feed.item({
+        rssData.push({
             title: data[index].title,
             description: article.innerHTML,
             url: `http://www.yinwang.org${data[index].url}`,
             author: 'Yin Wang',
             date: `${urlStruct[2]}-${urlStruct[3]}-${urlStruct[4]}`,
+            order: (urlStruct[2] * 10000) + (urlStruct[3] * 100) + (urlStruct[4]),
         });
         callback();
     };
@@ -98,6 +100,12 @@ if (process.argv[2] === 'help' || process.argv[2] === '-h') {
         }
         const target = path.resolve(process.cwd(), process.argv[2] || `yinwang.${new Date().getTime()}.xml`);
         printLog('info', `正在输出 RSS Feed 到 ${target}`);
+        rssData.sort((a, b) => {
+            return b.order - a.order;
+        });
+        for (let i = 0; i < rssData.length; i += 1) {
+            feed.item(rssData[i]);
+        }
         fs.writeFileSync(target, feed.xml(), { encoding: 'utf8' });
         process.exit(0);
         return false;
