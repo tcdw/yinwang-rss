@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { version } = require('./package.json');
 const { JSDOM } = require('jsdom');
 const request = require('request');
