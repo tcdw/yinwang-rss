@@ -100,9 +100,7 @@ if (process.argv[2] === 'help' || process.argv[2] === '-h') {
         }
         const target = path.resolve(process.cwd(), process.argv[2] || `yinwang.${new Date().getTime()}.xml`);
         printLog('info', `正在输出 RSS Feed 到 ${target}`);
-        rssData.sort((a, b) => {
-            return b.order - a.order;
-        });
+        rssData.sort((a, b) => b.order - a.order);
         for (let i = 0; i < rssData.length; i += 1) {
             feed.item(rssData[i]);
         }
