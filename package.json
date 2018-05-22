@@ -1,0 +1,23 @@
+{
+  "name": "yinwang-rss",
+  "version": "1.0.0",
+  "description": "给王垠的个人博客添加 RSS！",
+  "main": "index.js",
+  "repository": "git@git.reallserver.cn:tcdw/yinwang-rss.git",
+  "author": "tcdw <tcdw2011@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
+  },
+  "dependencies": {
+    "jsdom": "^11.10.0",
+    "request": "^2.87.0",
+    "rss": "^1.2.2"
+  },
+  "bin": {
+    "yinwang-rss": "./index.js"
+  },
+  "preferGlobal": true
+}
