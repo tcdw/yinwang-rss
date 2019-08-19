@@ -1,6 +1,6 @@
 {
   "name": "yinwang-rss",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "给王垠的个人博客添加 RSS！",
   "main": "index.js",
   "repository": "git@git.reallserver.cn:tcdw/yinwang-rss.git",
