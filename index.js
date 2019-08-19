@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const { version } = require('./package.json');
 const { JSDOM } = require('jsdom');
 const request = require('request');
 const RSS = require('rss');
 const fs = require('fs');
 const path = require('path');
+const { version } = require('./package.json');
 
 const printLog = (level, text) => {
     switch (level) {
@@ -21,7 +21,7 @@ const printLog = (level, text) => {
     return true;
 };
 
-const req = url => new Promise((resolve, reject) => {
+const req = (url) => new Promise((resolve, reject) => {
     request({
         url,
         headers: {
@@ -30,7 +30,9 @@ const req = url => new Promise((resolve, reject) => {
         },
     }, (e, response, body) => {
         if (!e && response.statusCode === 200) {
-            resolve(new JSDOM(body));
+            resolve(new JSDOM(body, {
+                referrer: url,
+            }));
         } else if (!e) {
             reject(new ReferenceError(`Server returned ${response.statusCode}`));
         } else {
@@ -75,13 +77,19 @@ if (process.argv[2] === 'help' || process.argv[2] === '-h') {
             printLog('error', e);
             process.exit(1);
         }
-        const article = slave.window.document.querySelector('.inner');
         const urlStruct = data[index].url.split('/');
-        article.removeChild(article.childNodes[0]);
-        article.removeChild(article.childNodes[0]);
+        let description = '';
+        try {
+            const article = slave.window.document.querySelector('.inner');
+            article.removeChild(article.childNodes[0]);
+            article.removeChild(article.childNodes[0]);
+            description = article.innerHTML;
+        } catch (e) {
+            printLog('error', e);
+        }
         rssData.push({
             title: data[index].title,
-            description: article.innerHTML,
+            description,
             url: `http://www.yinwang.org${data[index].url}`,
             author: 'Yin Wang',
             date: `${urlStruct[2]}-${urlStruct[3]}-${urlStruct[4]}`,
