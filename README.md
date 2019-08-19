@@ -18,5 +18,5 @@ $ which yinwang-rss
 然后设置 cron：
 
 ```
-*/30 * * * * /usr/local/bin/node /usr/local/bin/yinwang-rss /var/www/rss/yinwang.xml &> /tmp/yinwang.log
+*/30 * * * * /usr/local/bin/node /usr/local/bin/yinwang-rss /var/www/rss/yinwang.xml
 ```
