@@ -1,22 +1,7 @@
-# 垠神 RSS
+# 王垠 RSS
 
 为王垠的 [博客](http://www.yinwang.org) 添加 RSS Feed！
 
-## 用法
+## 维护停止
 
-```bash
-npm install -g git+https://github.com/tcdw/yinwang-rss
-```
-
-然后检查 yinwang-rss 在哪里：
-
-```bash
-$ which yinwang-rss
-/usr/local/bin/yinwang-rss
-```
-
-然后设置 cron：
-
-```
-*/30 * * * * /usr/local/bin/node /usr/local/bin/yinwang-rss /var/www/rss/yinwang.xml
-```
+我对于关注王垠博客没什么兴趣了，所以本项目不再维护。
